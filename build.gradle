@@ -1,21 +1,21 @@
 plugins {
-    id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.8.10'
-    id "org.jetbrains.kotlin.plugin.serialization" version "1.8.10"
-    id 'maven-publish'
+    id "java"
+    id "org.jetbrains.kotlin.jvm" version "1.8.10"
+    id "org.jetbrains.dokka" version "1.7.20"
+    id "maven-publish"
     id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
-if (hasProperty('buildScan')) {
+if (hasProperty("buildScan")) {
     buildScan {
-        termsOfServiceUrl = 'https://gradle.com/terms-of-service'
-        termsOfServiceAgree = 'yes'
+        termsOfServiceUrl = "https://gradle.com/terms-of-service"
+        termsOfServiceAgree = "yes"
     }
 }
 
-compileJava.options.encoding = 'UTF-8'
+compileJava.options.encoding = "UTF-8"
 tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+    options.encoding = "UTF-8"
 }
 
 static def determineVersion(String defaultVersion) {
@@ -27,7 +27,7 @@ group = "dev.mikchan.mcnp"
 version = determineVersion("0.0.1")
 
 def localProperties = new Properties()
-def propertiesFile = rootProject.file('local.properties')
+def propertiesFile = rootProject.file("local.properties")
 if (propertiesFile.exists()) {
     localProperties.load(new FileInputStream(propertiesFile))
 }
@@ -35,33 +35,34 @@ if (propertiesFile.exists()) {
 repositories {
     mavenCentral()
     maven {
-        name = 'spigotmc-repo'
-        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+        name = "spigotmc-repo"
+        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
     }
 
     maven {
-        name = 'sonatype'
-        url = 'https://oss.sonatype.org/content/groups/public/'
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
     }
 
     maven {
-        name = 'jitpack'
-        url = 'https://jitpack.io/'
+        name = "jitpack"
+        url = "https://jitpack.io/"
     }
 }
 
 dependencies {
     //noinspection VulnerableLibrariesLocal
-    compileOnly 'org.spigotmc:spigot-api:1.19.3-R0.1-SNAPSHOT'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    compileOnly "org.spigotmc:spigot-api:1.19.3-R0.1-SNAPSHOT"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.10"
 
     implementation "io.ktor:ktor-server-core:2.2.3"
     implementation "io.ktor:ktor-server-netty:2.2.3"
-    implementation 'dev.dejvokep:boosted-yaml-spigot:1.3'
+    implementation "dev.dejvokep:boosted-yaml-spigot:1.3"
 
-    compileOnly 'com.github.NuVotifier.NuVotifier:nuvotifier-bukkit:2.7.2'
-    compileOnly 'com.github.NuVotifier.NuVotifier:nuvotifier-api:2.7.2'
-    compileOnly 'com.github.NuVotifier.NuVotifier:nuvotifier-common:2.7.2'
+    compileOnly "com.github.NuVotifier.NuVotifier:nuvotifier-bukkit:2.7.2"
+    compileOnly "com.github.NuVotifier.NuVotifier:nuvotifier-api:2.7.2"
+    compileOnly "com.github.NuVotifier.NuVotifier:nuvotifier-common:2.7.2"
 
     implementation "org.bstats:bstats-bukkit:3.0.0"
     shadow "org.bstats:bstats-bukkit:3.0.0"
@@ -114,26 +115,36 @@ if (file("local.gradle").exists()) {
     apply from: "local.gradle"
 }
 
+dokkaHtml {
+    outputDirectory.set(file("${buildDir}/dokka"))
+}
+
+javadocJar {
+    archiveClassifier.set("javadoc")
+    dependsOn("dokkaHtml")
+    from("$buildDir/dokka")
+}
+
 shadowJar {
     archiveClassifier.set(null)
 
     dependencies {
-        include(dependency('org.bstats:bstats-bukkit'))
-        include(dependency('org.bstats:bstats-base'))
+        include(dependency("org.bstats:bstats-bukkit"))
+        include(dependency("org.bstats:bstats-base"))
     }
 
     relocate "org.bstats", "dev.mikchan.mcnp.votereceiver.shadow.org.bstats"
 }
 
-/*
+
 publishing {
     repositories {
         maven {
             name = "GitHub"
-            url = "https://maven.pkg.github.com/MikChanNoPlugins/VK"
+            url = "https://maven.pkg.github.com/MikChanNoPlugins/VoteReceiver"
             credentials {
-                username = localProperties['user'] ?: System.getenv("GITHUB_ACTOR")
-                password = localProperties['key'] ?: System.getenv("GITHUB_TOKEN")
+                username = localProperties["user"] ?: System.getenv("GITHUB_ACTOR")
+                password = localProperties["key"] ?: System.getenv("GITHUB_TOKEN")
             }
         }
     }
@@ -141,7 +152,7 @@ publishing {
     publications {
         gpr(MavenPublication) {
             groupId = group
-            artifactId = 'vk'
+            artifactId = "vote-receiver"
 
             artifact jar
             artifact javadocJar
@@ -149,4 +160,3 @@ publishing {
         }
     }
 }
-*/
