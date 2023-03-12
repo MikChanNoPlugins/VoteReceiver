@@ -7,11 +7,11 @@ Converts various monitoring vote systems to Votifier events
 
 ## Dependencies
 
-- [NuVotifier](https://www.spigotmc.org/resources/nuvotifier.13449/)
+-   [NuVotifier](https://www.spigotmc.org/resources/nuvotifier.13449/)
 
 ## Supported Monitorings
 
-- [MineServ](https://mineserv.top)
+-   [MineServ](https://mineserv.top)
 
 ## Support the creator
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/mcnp)
