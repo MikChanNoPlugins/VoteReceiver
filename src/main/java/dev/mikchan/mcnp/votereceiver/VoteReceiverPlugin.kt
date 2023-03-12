@@ -13,6 +13,8 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.bstats.bukkit.Metrics
 import org.bukkit.plugin.java.JavaPlugin
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 
 /**
@@ -29,6 +31,7 @@ class VoteReceiverPlugin : JavaPlugin() {
     val config: IConfig by lazy { factory.createConfig() }
     val utility: IUtility by lazy { factory.createUtility() }
     val voteHandler: NuVotifierBukkit? by lazy { factory.createVoteHandler() }
+    val threadPool: ExecutorService by lazy { Executors.newSingleThreadExecutor() }
     private val webServer: ApplicationEngine by lazy { factory.createApplicationEngine() }
 
     override fun onEnable() {
@@ -39,5 +42,6 @@ class VoteReceiverPlugin : JavaPlugin() {
 
     override fun onDisable() {
         webServer.stop()
+        threadPool.shutdownNow()
     }
 }
