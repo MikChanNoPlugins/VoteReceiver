@@ -9,6 +9,7 @@ import dev.mikchan.mcnp.votereceiver.factory.IFactory
 import dev.mikchan.mcnp.votereceiver.utility.IUtility
 import dev.mikchan.mcnp.votereceiver.utility.base.Utility
 import dev.mikchan.mcnp.votereceiver.web.createMineServRoute
+import dev.mikchan.mcnp.votereceiver.web.createTMonitoringComRoute
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.routing.*
@@ -33,6 +34,7 @@ internal class Factory(private val plugin: VoteReceiverPlugin) : IFactory {
         return embeddedServer(Netty, port = plugin.config.port) {
             routing {
                 createMineServRoute(plugin)
+                createTMonitoringComRoute(plugin)
             }
         }
     }
