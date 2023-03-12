@@ -20,8 +20,4 @@ libraries:
   - io.ktor:ktor-server-core-jvm:2.2.3
   - io.ktor:ktor-server-netty:2.2.3
   - io.ktor:ktor-server-netty-jvm:2.2.3
-  - io.ktor:ktor-server-content-negotiation:2.2.3
-  - io.ktor:ktor-server-content-negotiation-jvm:2.2.3
-  - io.ktor:ktor-serialization-kotlinx-json:2.2.3
-  - io.ktor:ktor-serialization-kotlinx-json-jvm:2.2.3
   - dev.dejvokep:boosted-yaml-spigot:1.3

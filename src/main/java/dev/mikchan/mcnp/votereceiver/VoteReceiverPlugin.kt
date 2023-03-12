@@ -5,12 +5,10 @@ import dev.mikchan.mcnp.votereceiver.config.IConfig
 import dev.mikchan.mcnp.votereceiver.factory.IFactory
 import dev.mikchan.mcnp.votereceiver.factory.base.Factory
 import dev.mikchan.mcnp.votereceiver.utility.IUtility
-import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.*
-import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.bstats.bukkit.Metrics
