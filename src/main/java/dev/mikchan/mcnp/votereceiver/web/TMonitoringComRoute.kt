@@ -35,7 +35,7 @@ internal fun Route.createTMonitoringComRoute(plugin: VoteReceiverPlugin) {
             try {
                 val client = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.ALWAYS).build()
                 val request =
-                    HttpRequest.newBuilder().uri(URI.create("https://tmonitoring.com/api/check/$hash/?id=$id")).build()
+                    HttpRequest.newBuilder().uri(URI.create("https://tmonitoring.com/api/check/$hash?id=$id")).build()
 
                 val response = client.send(request, HttpResponse.BodyHandlers.ofString())
                 val result = response.body() ?: return@submit
