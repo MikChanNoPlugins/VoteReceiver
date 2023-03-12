@@ -10,7 +10,7 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-internal fun Route.createMineServRoute(plugin: VoteReceiverPlugin) {
+internal fun Route.createMineServTopRoute(plugin: VoteReceiverPlugin) {
     post("/mineserv.top") {
         val secret = plugin.config.mineServTopKey
         if (secret == null) {
