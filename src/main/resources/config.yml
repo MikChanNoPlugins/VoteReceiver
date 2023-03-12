@@ -1,0 +1,7 @@
+# Automatic property, do not touch!
+config-version: 1
+
+port: 6418
+
+# mineserv.top
+mineserv-top-key: ""
