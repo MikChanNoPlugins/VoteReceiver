@@ -14,6 +14,10 @@ import io.ktor.server.routing.*
 import org.bstats.bukkit.Metrics
 import org.bukkit.plugin.java.JavaPlugin
 
+
+/**
+ * Main plugin class
+ */
 @Suppress("unused")
 class VoteReceiverPlugin : JavaPlugin() {
     companion object {
