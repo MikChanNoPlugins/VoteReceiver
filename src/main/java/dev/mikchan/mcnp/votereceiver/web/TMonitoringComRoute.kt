@@ -20,7 +20,9 @@ import java.util.logging.Level
 internal fun Route.createTMonitoringComRoute(plugin: VoteReceiverPlugin) {
     get("/tmonitoring.com") {
         val hash = call.request.queryParameters["hash"]
+        plugin.logger.info("TMonitoring: $hash")
         val id = call.request.queryParameters["id"]
+        plugin.logger.info("TMonitoring: $id")
 
         if (hash == null || id == null) {
             call.respond("An error has occurred")
@@ -31,19 +33,24 @@ internal fun Route.createTMonitoringComRoute(plugin: VoteReceiverPlugin) {
 
         plugin.threadPool.submit {
             try {
-                val client = HttpClient.newBuilder().build()
+                val client = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.ALWAYS).build()
                 val request =
-                    HttpRequest.newBuilder().uri(URI.create("https://tmonitoring.com/api/check/$hash?id=$id")).build()
+                    HttpRequest.newBuilder().uri(URI.create("https://tmonitoring.com/api/check/$hash/?id=$id")).build()
 
                 val response = client.send(request, HttpResponse.BodyHandlers.ofString())
                 val result = response.body() ?: return@submit
+                plugin.logger.info("TMonitoring: $result")
 
                 val data = Pherialize.unserialize(result).toArray() ?: return@submit
+                plugin.logger.info("TMonitoring: $data")
+
                 val remoteHash = data.getString("hash")
+                plugin.logger.info("TMonitoring: $remoteHash")
 
                 if (hash != remoteHash) return@submit
 
                 val username = data.getString("username") ?: return@submit
+                plugin.logger.info("TMonitoring: $username")
 
                 val vote = Vote("tmonitoring.com", username, address, System.currentTimeMillis().toString(10))
                 plugin.voteHandler?.onVoteReceived(vote, VotifierSession.ProtocolVersion.UNKNOWN, address)
