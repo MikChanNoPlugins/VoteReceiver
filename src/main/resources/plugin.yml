@@ -7,7 +7,7 @@ website: https://github.com/MikChanNoPlugins
 
 prefix: MCnVoteReceiver
 api-version: 1.19
-main: dev.mikchan.mcnp.votereceiver.VoteReceiverPlugin
+main: dev.mikchan.mcnp.votereceiver.VoteReceiverSpigotPlugin
 
 depend:
   - Votifier

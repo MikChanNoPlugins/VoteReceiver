@@ -1,7 +1,7 @@
 package dev.mikchan.mcnp.votereceiver.factory.spigot
 
 import com.vexsoftware.votifier.NuVotifierBukkit
-import dev.mikchan.mcnp.votereceiver.VoteReceiverPlugin
+import dev.mikchan.mcnp.votereceiver.VoteReceiverSpigotPlugin
 import dev.mikchan.mcnp.votereceiver.config.IConfig
 import dev.mikchan.mcnp.votereceiver.config.boosted.BoostedYamlConfig
 import dev.mikchan.mcnp.votereceiver.config.fallback.FallbackConfig
@@ -15,7 +15,7 @@ import io.ktor.server.netty.*
 import io.ktor.server.routing.*
 import java.io.File
 
-internal class SpigotFactory(private val plugin: VoteReceiverPlugin) : IFactory {
+internal class SpigotFactory(private val plugin: VoteReceiverSpigotPlugin) : IFactory {
     override fun createConfig(): IConfig {
         val resource = plugin.getResource("config.yml")
 

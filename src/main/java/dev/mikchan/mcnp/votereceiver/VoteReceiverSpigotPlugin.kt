@@ -21,7 +21,7 @@ import java.util.concurrent.Executors
  * Main plugin class
  */
 @Suppress("unused")
-class VoteReceiverPlugin : JavaPlugin() {
+class VoteReceiverSpigotPlugin : JavaPlugin() {
     companion object {
         private const val bStatsId = 17922
     }
