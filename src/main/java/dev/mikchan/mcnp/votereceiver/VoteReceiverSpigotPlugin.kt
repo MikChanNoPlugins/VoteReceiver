@@ -15,6 +15,7 @@ import org.bstats.bukkit.Metrics
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import java.util.logging.Logger
 
 
 /**
@@ -33,6 +34,7 @@ class VoteReceiverSpigotPlugin : JavaPlugin(), IPlugin {
     override val voteHandler: NuVotifierBukkit? by lazy { factory.createVoteHandler() }
     override val threadPool: ExecutorService by lazy { Executors.newSingleThreadExecutor() }
     override val webServer: ApplicationEngine by lazy { factory.createApplicationEngine() }
+    override val logger: Logger get() = this.getLogger()
 
     override fun onEnable() {
         webServer.start()

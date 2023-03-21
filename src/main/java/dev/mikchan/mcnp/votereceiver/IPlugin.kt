@@ -5,6 +5,7 @@ import dev.mikchan.mcnp.votereceiver.config.IConfig
 import dev.mikchan.mcnp.votereceiver.utility.IUtility
 import io.ktor.server.engine.*
 import java.util.concurrent.ExecutorService
+import java.util.logging.Logger
 
 /**
  * Plugin interface
@@ -34,4 +35,9 @@ interface IPlugin {
      * A web server instance
      */
     val webServer: ApplicationEngine
+
+    /**
+     * Logger instance
+     */
+    val logger: Logger
 }

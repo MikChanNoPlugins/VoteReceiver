@@ -8,6 +8,7 @@ import io.ktor.server.engine.*
 import net.md_5.bungee.api.plugin.Plugin
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import java.util.logging.Logger
 
 /**
  * Main bungeeecord plugin class
@@ -21,6 +22,7 @@ class VoteReceiverBungeeCordPlugin : Plugin(), IPlugin {
     override val voteHandler: NuVotifierBukkit? by lazy { factory.createVoteHandler() }
     override val threadPool: ExecutorService by lazy { Executors.newSingleThreadExecutor() }
     override val webServer: ApplicationEngine by lazy { factory.createApplicationEngine() }
+    override val logger: Logger get() = this.getLogger()
 
     override fun onEnable() {
         webServer.start()
