@@ -2,7 +2,7 @@ package dev.mikchan.mcnp.votereceiver.web
 
 import com.vexsoftware.votifier.model.Vote
 import com.vexsoftware.votifier.net.VotifierSession
-import dev.mikchan.mcnp.votereceiver.VoteReceiverPlugin
+import dev.mikchan.mcnp.votereceiver.IPlugin
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
@@ -10,7 +10,7 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-internal fun Route.createTestRoute(plugin: VoteReceiverPlugin) {
+internal fun Route.createTestRoute(plugin: IPlugin) {
     get("/test") {
         val parameters = try {
             call.receiveParameters()
