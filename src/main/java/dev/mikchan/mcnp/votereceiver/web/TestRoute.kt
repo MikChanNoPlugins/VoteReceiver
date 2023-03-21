@@ -10,6 +10,8 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 internal fun Route.createTestRoute(plugin: IPlugin) {
+    plugin.log.warning("!!! TEST ROUTE IS ENABLED. IF THIS IS NOT INTENDED, SHOUT DOWN THE SERVER IMMEDIATELY AND DISABLE IT IN config.yml !!!")
+
     get("/test") {
         val username = call.request.queryParameters["username"]
 
