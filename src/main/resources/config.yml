@@ -5,3 +5,8 @@ port: 6418
 
 # mineserv.top
 mineserv-top-key: ""
+
+# Enables the route /test?username=[username]
+# Warning: Should NEVER EVER be true
+# in production, for test purposes only.
+enable-test-route: false
