@@ -3,7 +3,7 @@ package dev.mikchan.mcnp.votereceiver
 import com.vexsoftware.votifier.NuVotifierBukkit
 import dev.mikchan.mcnp.votereceiver.config.IConfig
 import dev.mikchan.mcnp.votereceiver.factory.IFactory
-import dev.mikchan.mcnp.votereceiver.factory.base.Factory
+import dev.mikchan.mcnp.votereceiver.factory.spigot.SpigotFactory
 import dev.mikchan.mcnp.votereceiver.utility.IUtility
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -26,7 +26,7 @@ class VoteReceiverPlugin : JavaPlugin() {
         private const val bStatsId = 17922
     }
 
-    private val factory: IFactory by lazy { Factory(this) }
+    private val factory: IFactory by lazy { SpigotFactory(this) }
 
     val config: IConfig by lazy { factory.createConfig() }
     val utility: IUtility by lazy { factory.createUtility() }
