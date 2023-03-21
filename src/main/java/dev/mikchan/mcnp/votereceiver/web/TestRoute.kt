@@ -6,20 +6,12 @@ import dev.mikchan.mcnp.votereceiver.IPlugin
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
-import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 internal fun Route.createTestRoute(plugin: IPlugin) {
     get("/test") {
-        val parameters = try {
-            call.receiveParameters()
-        } catch (ex: Exception) {
-            call.respond(HttpStatusCode.InternalServerError, "Incomplete request")
-            return@get
-        }
-
-        val username = parameters["username"]
+        val username = call.request.queryParameters["username"]
 
         if (username == null) {
             call.respond(HttpStatusCode.InternalServerError, "The username is not specified")
