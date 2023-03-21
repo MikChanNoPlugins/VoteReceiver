@@ -27,6 +27,8 @@ internal fun Route.createTMonitoringComRoute(plugin: IPlugin) {
             return@get
         }
 
+        call.respond("Ok")
+
         val address = call.request.origin.remoteHost
 
         plugin.threadPool.submit {
