@@ -18,7 +18,7 @@ import java.util.concurrent.Executors
 
 
 /**
- * Main plugin class
+ * Main spigot plugin class
  */
 @Suppress("unused")
 class VoteReceiverSpigotPlugin : JavaPlugin() {
