@@ -24,6 +24,8 @@ internal fun Route.createTestRoute(plugin: IPlugin) {
             call.request.origin.remoteHost,
             System.currentTimeMillis().toString(10),
         )
-        plugin.voteHandler?.onVoteReceived(vote, VotifierSession.ProtocolVersion.UNKNOWN, vote.address)
+        plugin.voteHandler?.onVoteReceived(vote, VotifierSession.ProtocolVersion.TEST, vote.address)
+
+        call.respond("Ok")
     }
 }
