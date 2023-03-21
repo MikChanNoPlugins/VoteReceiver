@@ -24,7 +24,7 @@ static def determineVersion(String defaultVersion) {
 }
 
 group = "dev.mikchan.mcnp"
-version = determineVersion("1.1.1")
+version = determineVersion("1.1.2")
 
 def localProperties = new Properties()
 def propertiesFile = rootProject.file("local.properties")
