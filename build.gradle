@@ -62,8 +62,8 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.10"
 
-    implementation "io.ktor:ktor-server-core:2.2.3"
-    implementation "io.ktor:ktor-server-netty:2.2.3"
+    implementation "io.ktor:ktor-server-core:2.2.4"
+    implementation "io.ktor:ktor-server-netty:2.2.4"
     implementation "dev.dejvokep:boosted-yaml:1.3"
     implementation "com.xk72:pherialize:1.2.4"
 
