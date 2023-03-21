@@ -1,0 +1,24 @@
+name: 'MikChanNoVoteReceiver'
+version: '${version}'
+
+authors: [ "George Endo (wtlgo / MikChan)" ]
+description: Converts various monitoring vote systems to Votifier
+website: https://github.com/MikChanNoPlugins
+
+prefix: MCnVoteReceiver
+api-version: 1.19
+main: dev.mikchan.mcnp.votereceiver.VoteReceiverBungeeCordPlugin
+
+depend:
+  - NuVotifier
+
+load: STARTUP
+
+libraries:
+  - org.jetbrains.kotlin:kotlin-stdlib:1.8.10
+  - io.ktor:ktor-server-core:2.2.3
+  - io.ktor:ktor-server-core-jvm:2.2.3
+  - io.ktor:ktor-server-netty:2.2.3
+  - io.ktor:ktor-server-netty-jvm:2.2.3
+  - dev.dejvokep:boosted-yaml-spigot:1.3
+  - com.xk72:pherialize:1.2.4
