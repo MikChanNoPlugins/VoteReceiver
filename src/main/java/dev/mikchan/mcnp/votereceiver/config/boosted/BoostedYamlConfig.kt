@@ -26,4 +26,5 @@ internal class BoostedYamlConfig(document: File, resource: InputStream) : IConfi
 
     override val port: Int get() = config.getInt("port", 6418)
     override val mineServTopKey: String? get() = config.getString("mineserv-top-key")
+    override val testEnabled: Boolean get() = config.getBoolean("enable-test-route", false)
 }

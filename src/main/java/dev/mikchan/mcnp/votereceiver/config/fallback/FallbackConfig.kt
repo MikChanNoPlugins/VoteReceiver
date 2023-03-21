@@ -9,4 +9,5 @@ internal class FallbackConfig : IConfig {
 
     override val port: Int get() = 6418
     override val mineServTopKey: String? get() = null
+    override val testEnabled: Boolean get() = false
 }

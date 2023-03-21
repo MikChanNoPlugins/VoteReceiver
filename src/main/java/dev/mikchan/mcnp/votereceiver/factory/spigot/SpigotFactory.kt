@@ -10,6 +10,7 @@ import dev.mikchan.mcnp.votereceiver.utility.IUtility
 import dev.mikchan.mcnp.votereceiver.utility.base.Utility
 import dev.mikchan.mcnp.votereceiver.web.createMineServTopRoute
 import dev.mikchan.mcnp.votereceiver.web.createTMonitoringComRoute
+import dev.mikchan.mcnp.votereceiver.web.createTestRoute
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.routing.*
@@ -35,6 +36,10 @@ internal class SpigotFactory(private val plugin: VoteReceiverSpigotPlugin) : IFa
             routing {
                 createMineServTopRoute(plugin)
                 createTMonitoringComRoute(plugin)
+
+                if (plugin.config.testEnabled) {
+                    createTestRoute(plugin)
+                }
             }
         }
     }
