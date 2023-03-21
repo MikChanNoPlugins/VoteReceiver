@@ -1,6 +1,5 @@
 package dev.mikchan.mcnp.votereceiver.factory.bungee
 
-import com.vexsoftware.votifier.VoteHandler
 import com.vexsoftware.votifier.bungee.NuVotifier
 import dev.mikchan.mcnp.votereceiver.VoteReceiverBungeeCordPlugin
 import dev.mikchan.mcnp.votereceiver.config.IConfig
@@ -41,7 +40,7 @@ internal class BungeeCordFactory(private val plugin: VoteReceiverBungeeCordPlugi
         }
     }
 
-    override fun createVoteHandler(): VoteHandler? {
+    override fun createVoteHandler(): NuVotifier? {
         return ProxyServer.getInstance().pluginManager.getPlugin("NuVotifier") as? NuVotifier
     }
 }
