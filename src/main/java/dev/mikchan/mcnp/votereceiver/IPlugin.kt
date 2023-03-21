@@ -39,5 +39,5 @@ interface IPlugin {
     /**
      * Logger instance
      */
-    val logger: Logger
+    val log: Logger
 }

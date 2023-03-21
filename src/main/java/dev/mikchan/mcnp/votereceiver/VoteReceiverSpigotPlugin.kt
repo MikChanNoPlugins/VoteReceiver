@@ -34,7 +34,7 @@ class VoteReceiverSpigotPlugin : JavaPlugin(), IPlugin {
     override val voteHandler: NuVotifierBukkit? by lazy { factory.createVoteHandler() }
     override val threadPool: ExecutorService by lazy { Executors.newSingleThreadExecutor() }
     override val webServer: ApplicationEngine by lazy { factory.createApplicationEngine() }
-    override val logger: Logger get() = this.getLogger()
+    override val log: Logger get() = this.logger
 
     override fun onEnable() {
         webServer.start()

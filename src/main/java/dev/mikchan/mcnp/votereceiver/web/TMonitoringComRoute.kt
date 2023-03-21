@@ -50,7 +50,7 @@ internal fun Route.createTMonitoringComRoute(plugin: IPlugin) {
                 plugin.voteHandler?.onVoteReceived(vote, VotifierSession.ProtocolVersion.UNKNOWN, address)
 
             } catch (ex: Exception) {
-                plugin.logger.log(Level.WARNING, ex.message, ex)
+                plugin.log.log(Level.WARNING, ex.message, ex)
             }
         }
     }
