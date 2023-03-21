@@ -68,6 +68,7 @@ dependencies {
     implementation "com.xk72:pherialize:1.2.4"
 
     compileOnly "com.github.NuVotifier.NuVotifier:nuvotifier-bukkit:2.7.2"
+    compileOnly "com.github.NuVotifier.NuVotifier:nuvotifier-bungeecord:2.7.2"
     compileOnly "com.github.NuVotifier.NuVotifier:nuvotifier-api:2.7.2"
     compileOnly "com.github.NuVotifier.NuVotifier:nuvotifier-common:2.7.2"
 

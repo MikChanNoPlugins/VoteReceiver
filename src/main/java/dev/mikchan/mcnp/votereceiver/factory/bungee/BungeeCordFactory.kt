@@ -1,6 +1,7 @@
 package dev.mikchan.mcnp.votereceiver.factory.bungee
 
 import com.vexsoftware.votifier.VoteHandler
+import com.vexsoftware.votifier.bungee.NuVotifier
 import dev.mikchan.mcnp.votereceiver.VoteReceiverBungeeCordPlugin
 import dev.mikchan.mcnp.votereceiver.config.IConfig
 import dev.mikchan.mcnp.votereceiver.config.boosted.BoostedYamlConfig
@@ -13,6 +14,7 @@ import dev.mikchan.mcnp.votereceiver.web.createTMonitoringComRoute
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.routing.*
+import net.md_5.bungee.api.ProxyServer
 import java.io.File
 
 internal class BungeeCordFactory(private val plugin: VoteReceiverBungeeCordPlugin) : IFactory {
@@ -40,6 +42,6 @@ internal class BungeeCordFactory(private val plugin: VoteReceiverBungeeCordPlugi
     }
 
     override fun createVoteHandler(): VoteHandler? {
-        return null
+        return ProxyServer.getInstance().pluginManager.getPlugin("NuVotifier") as? NuVotifier
     }
 }
