@@ -1,7 +1,7 @@
-package dev.mikchan.mcnp.votereceiver.factory.base
+package dev.mikchan.mcnp.votereceiver.factory.bungee
 
-import com.vexsoftware.votifier.NuVotifierBukkit
-import dev.mikchan.mcnp.votereceiver.VoteReceiverPlugin
+import com.vexsoftware.votifier.bungee.NuVotifier
+import dev.mikchan.mcnp.votereceiver.VoteReceiverBungeeCordPlugin
 import dev.mikchan.mcnp.votereceiver.config.IConfig
 import dev.mikchan.mcnp.votereceiver.config.boosted.BoostedYamlConfig
 import dev.mikchan.mcnp.votereceiver.config.fallback.FallbackConfig
@@ -14,11 +14,12 @@ import dev.mikchan.mcnp.votereceiver.web.createTestRoute
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.routing.*
+import net.md_5.bungee.api.ProxyServer
 import java.io.File
 
-internal class Factory(private val plugin: VoteReceiverPlugin) : IFactory {
+internal class BungeeCordFactory(private val plugin: VoteReceiverBungeeCordPlugin) : IFactory {
     override fun createConfig(): IConfig {
-        val resource = plugin.getResource("config.yml")
+        val resource = plugin.getResourceAsStream("config.yml")
 
         return if (resource != null) {
             BoostedYamlConfig(File(plugin.dataFolder, "config.yml"), resource)
@@ -44,7 +45,7 @@ internal class Factory(private val plugin: VoteReceiverPlugin) : IFactory {
         }
     }
 
-    override fun createVoteHandler(): NuVotifierBukkit? {
-        return plugin.server.pluginManager.getPlugin("Votifier") as? NuVotifierBukkit
+    override fun createVoteHandler(): NuVotifier? {
+        return ProxyServer.getInstance().pluginManager.getPlugin("NuVotifier") as? NuVotifier
     }
 }

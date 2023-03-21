@@ -3,7 +3,7 @@ package dev.mikchan.mcnp.votereceiver.web
 import com.vexsoftware.votifier.model.Vote
 import com.vexsoftware.votifier.net.VotifierSession
 import de.ailis.pherialize.Pherialize
-import dev.mikchan.mcnp.votereceiver.VoteReceiverPlugin
+import dev.mikchan.mcnp.votereceiver.IPlugin
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
 import io.ktor.server.response.*
@@ -17,7 +17,7 @@ import java.util.logging.Level
 /**
  * Reference `https://tmonitoring.com/uploads/files/top.zip`
  */
-internal fun Route.createTMonitoringComRoute(plugin: VoteReceiverPlugin) {
+internal fun Route.createTMonitoringComRoute(plugin: IPlugin) {
     get("/tmonitoring.com") {
         val hash = call.request.queryParameters["hash"]
         val id = call.request.queryParameters["id"]
@@ -26,6 +26,8 @@ internal fun Route.createTMonitoringComRoute(plugin: VoteReceiverPlugin) {
             call.respond("An error has occurred")
             return@get
         }
+
+        call.respond("Ok")
 
         val address = call.request.origin.remoteHost
 
@@ -50,7 +52,7 @@ internal fun Route.createTMonitoringComRoute(plugin: VoteReceiverPlugin) {
                 plugin.voteHandler?.onVoteReceived(vote, VotifierSession.ProtocolVersion.UNKNOWN, address)
 
             } catch (ex: Exception) {
-                plugin.logger.log(Level.WARNING, ex.message, ex)
+                plugin.log.log(Level.WARNING, ex.message, ex)
             }
         }
     }

@@ -7,10 +7,10 @@ website: https://github.com/MikChanNoPlugins
 
 prefix: MCnVoteReceiver
 api-version: 1.19
-main: dev.mikchan.mcnp.votereceiver.VoteReceiverSpigotPlugin
+main: dev.mikchan.mcnp.votereceiver.VoteReceiverBungeeCordPlugin
 
 depend:
-  - Votifier
+  - NuVotifier
 
 load: STARTUP
 
