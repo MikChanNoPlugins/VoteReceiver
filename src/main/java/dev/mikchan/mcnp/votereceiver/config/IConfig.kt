@@ -20,4 +20,11 @@ interface IConfig {
      * A secret key of `mineserv.top`
      */
     val mineServTopKey: String?
+
+    /**
+     * Determines, if the test route accessible.
+     *
+     * WARNING: Should NEVER be `true` in production
+     */
+    val testEnabled: Boolean
 }

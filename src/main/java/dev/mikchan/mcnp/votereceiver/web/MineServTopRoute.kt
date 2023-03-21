@@ -2,7 +2,7 @@ package dev.mikchan.mcnp.votereceiver.web
 
 import com.vexsoftware.votifier.model.Vote
 import com.vexsoftware.votifier.net.VotifierSession
-import dev.mikchan.mcnp.votereceiver.VoteReceiverPlugin
+import dev.mikchan.mcnp.votereceiver.IPlugin
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
@@ -10,7 +10,10 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-internal fun Route.createMineServRoute(plugin: VoteReceiverPlugin) {
+/**
+ * Reference `https://github.com/kartashovio/reward-system-docs/releases`
+ */
+internal fun Route.createMineServTopRoute(plugin: IPlugin) {
     post("/mineserv.top") {
         val secret = plugin.config.mineServTopKey
         if (secret == null) {

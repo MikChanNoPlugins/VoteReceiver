@@ -12,6 +12,7 @@ Converts various monitoring vote systems to Votifier events
 ## Supported Monitorings
 
 -   [MineServ](https://mineserv.top)
+-   [TMonitoring](https://tmonitoring.com)
 
 ## Support the creator
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/mcnp)

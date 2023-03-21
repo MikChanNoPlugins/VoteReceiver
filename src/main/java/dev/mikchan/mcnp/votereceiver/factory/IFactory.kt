@@ -1,6 +1,7 @@
 package dev.mikchan.mcnp.votereceiver.factory
 
 import com.vexsoftware.votifier.NuVotifierBukkit
+import com.vexsoftware.votifier.VoteHandler
 import dev.mikchan.mcnp.votereceiver.config.IConfig
 import dev.mikchan.mcnp.votereceiver.utility.IUtility
 import io.ktor.server.engine.*
@@ -37,5 +38,5 @@ interface IFactory {
      *
      * @return A [NuVotifierBukkit] instance
      */
-    fun createVoteHandler(): NuVotifierBukkit?
+    fun createVoteHandler(): VoteHandler?
 }
