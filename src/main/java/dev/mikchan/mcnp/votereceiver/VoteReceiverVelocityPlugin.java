@@ -5,7 +5,7 @@ import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
 import org.slf4j.Logger;
 
-@Plugin(id = "mcn.vote-receiver", name = "MikChanのVoteReceiver", version = "0.1.0-SNAPSHOT",
+@Plugin(id = "mcn_vote-receiver", name = "MikChanのVoteReceiver", version = "0.1.0-SNAPSHOT",
         url = "https://github.com/MikChanNoPlugins/VoteReceiver",
         description = "Converts various monitoring vote systems to Votifier",
         authors = {"George Endo (wtlgo / MikChan)"})
