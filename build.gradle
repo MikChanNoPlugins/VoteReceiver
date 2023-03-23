@@ -80,6 +80,7 @@ dependencies {
     implementation "com.github.NuVotifier.NuVotifier:nuvotifier-common:2.7.2"
 
     shadow "org.bstats:bstats-bukkit:3.0.0"
+    shadow "org.apache.maven:maven-resolver-provider:3.9.1"
 }
 
 def targetJavaVersion = 11
