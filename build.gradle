@@ -135,14 +135,17 @@ javadocJar {
 shadowJar {
     archiveClassifier.set(null)
 
-    dependencies {
-        include(dependency("org.bstats:bstats-bukkit"))
-        include(dependency("org.bstats:bstats-base"))
-    }
-
-    relocate "org.bstats", "dev.mikchan.mcnp.votereceiver.shadow.org.bstats"
+    project.configurations.shadow.canBeResolved = true
+    configurations = [project.configurations.shadow]
 }
 
+import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
+
+task relocateShadowJar(type: ConfigureShadowRelocation) {
+    target = tasks.shadowJar
+    prefix = "dev.mikchan.mcnp.votereceiver.shadow"
+}
+tasks.shadowJar.dependsOn tasks.relocateShadowJar
 
 publishing {
     repositories {
