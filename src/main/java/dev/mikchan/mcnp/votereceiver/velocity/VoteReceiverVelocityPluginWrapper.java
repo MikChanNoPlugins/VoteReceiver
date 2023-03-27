@@ -21,18 +21,24 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.List;
 
-@Plugin(id = "mcn_vote-receiver", name = "MikChanNoVoteReceiver", version = "0.1.0-SNAPSHOT",
+@Plugin(id = "mcn_vote-receiver",
+        name = "MikChanNoVoteReceiver",
+        version = "0.1.0-SNAPSHOT",
         url = "https://github.com/MikChanNoPlugins/VoteReceiver",
         description = "Converts various monitoring vote systems to Votifier",
-        authors = {"George Endo (wtlgo / MikChan)"}, dependencies = {@Dependency(id = "nuvotifier")})
+        authors = {"George Endo (wtlgo / MikChan)"},
+        dependencies = {@Dependency(id = "nuvotifier")})
 public class VoteReceiverVelocityPluginWrapper {
     private final ProxyServer server;
     private final Logger logger;
 
     private final Path dataDirectory;
+    private VoteReceiverVelocityPlugin plugin;
 
     @Inject
-    public VoteReceiverVelocityPluginWrapper(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory) {
+    public VoteReceiverVelocityPluginWrapper(ProxyServer server, Logger logger,
+                                             @DataDirectory
+                                             Path dataDirectory) {
         this.server = server;
         this.logger = logger;
         this.dataDirectory = dataDirectory;
@@ -49,8 +55,6 @@ public class VoteReceiverVelocityPluginWrapper {
     public Path getDataDirectory() {
         return dataDirectory;
     }
-
-    private VoteReceiverVelocityPlugin plugin;
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
@@ -73,7 +77,8 @@ public class VoteReceiverVelocityPluginWrapper {
             //noinspection ResultOfMethodCallIgnored
             location.getParentFile().mkdirs();
 
-            try (BufferedInputStream in = new BufferedInputStream(url.openStream());
+            try (BufferedInputStream in = new BufferedInputStream(
+                    url.openStream());
                  FileOutputStream output = new FileOutputStream(location)) {
                 byte[] buffer = new byte[1024];
                 int bytes;
@@ -82,7 +87,8 @@ public class VoteReceiverVelocityPluginWrapper {
                 }
             }
         } catch (Exception exception) {
-            if (logger != null) logger.error("Failed to download " + url + "...");
+            if (logger != null)
+                logger.error("Failed to download " + url + "...");
             throw new RuntimeException(exception);
         }
     }
@@ -90,8 +96,8 @@ public class VoteReceiverVelocityPluginWrapper {
 
     private void registerDependencies() {
         try {
-            final URL jekaUrl = new URL(
-                    "https://repo1.maven.org/maven2/dev/jeka/jeka-core/0.10.11/jeka-core-0.10.11.jar");
+            final URL jekaUrl =
+                    new URL("https://repo1.maven.org/maven2/dev/jeka/jeka-core/0.10.11/jeka-core-0.10.11.jar");
             final File jekaPath = new File(getDataDirectory().toFile(), "libs");
             //noinspection ResultOfMethodCallIgnored
             jekaPath.mkdirs();
@@ -101,16 +107,22 @@ public class VoteReceiverVelocityPluginWrapper {
                 download(jekaUrl, jekaFile);
             }
 
-            getServer().getPluginManager().addToClasspath(this, jekaFile.toPath());
+            getServer().getPluginManager()
+                    .addToClasspath(this, jekaFile.toPath());
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
 
-        final JkDependencySet deps = JkDependencySet.of().and("org.jetbrains.kotlin:kotlin-stdlib:1.8.10").and(
-                "io.ktor:ktor-server-core:2.2.4").and("io.ktor:ktor-server-core-jvm:2.2.4").and(
-                "io.ktor:ktor-server-netty:2.2.4").and("io.ktor:ktor-server-netty-jvm:2.2.4").and(
-                "dev.dejvokep:boosted-yaml:1.3").and("com.xk72:pherialize:1.2.4");
-        final JkDependencyResolver resolver = JkDependencyResolver.of().setRepos(JkRepo.ofMavenCentral().toSet());
+        final JkDependencySet deps = JkDependencySet.of()
+                .and("org.jetbrains.kotlin:kotlin-stdlib:1.8.10")
+                .and("io.ktor:ktor-server-core:2.2.4")
+                .and("io.ktor:ktor-server-core-jvm:2.2.4")
+                .and("io.ktor:ktor-server-netty:2.2.4")
+                .and("io.ktor:ktor-server-netty-jvm:2.2.4")
+                .and("dev.dejvokep:boosted-yaml:1.3")
+                .and("com.xk72:pherialize:1.2.4");
+        final JkDependencyResolver resolver = JkDependencyResolver.of()
+                .setRepos(JkRepo.ofMavenCentral().toSet());
         final List<Path> paths = resolver.resolve(deps).getFiles().getEntries();
 
         for (final Path path : paths) {
