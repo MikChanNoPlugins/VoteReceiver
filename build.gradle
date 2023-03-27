@@ -58,15 +58,6 @@ repositories {
         name = 'papermc'
         url = 'https://repo.papermc.io/repository/maven-public/'
     }
-
-    maven {
-        name = "GitHub/MikChanNoPlugins/Utility.DependencyDownloader"
-        url = "https://maven.pkg.github.com/MikChanNoPlugins/Utility.DependencyDownloader"
-        credentials {
-            username = localProperties['user'] ?: System.getenv("GITHUB_ACTOR")
-            password = localProperties['key'] ?: System.getenv("GITHUB_TOKEN")
-        }
-    }
 }
 
 dependencies {
