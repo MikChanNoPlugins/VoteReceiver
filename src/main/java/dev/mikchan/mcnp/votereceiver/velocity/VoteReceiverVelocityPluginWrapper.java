@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.List;
@@ -30,9 +30,11 @@ import java.util.List;
         dependencies = {@Dependency(id = "nuvotifier")})
 public class VoteReceiverVelocityPluginWrapper {
     private final ProxyServer server;
+
     private final Logger logger;
 
     private final Path dataDirectory;
+
     private VoteReceiverVelocityPlugin plugin;
 
     @Inject
@@ -58,60 +60,58 @@ public class VoteReceiverVelocityPluginWrapper {
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
-        registerDependencies();
-        plugin = new VoteReceiverVelocityPlugin(this);
+        try {
+            registerDependencies();
 
-        plugin.getWebServer().start(true);
+            plugin = new VoteReceiverVelocityPlugin(this);
+            plugin.getWebServer().start(true);
+        } catch (IOException e) {
+            logger.error("Unable to enable plugin");
+        }
     }
 
     @Subscribe
     void onProxyShutdownEvent(ProxyShutdownEvent event) {
+        if (plugin == null) return;
         plugin.getWebServer().stop(500, 500);
         plugin.getThreadPool().shutdown();
     }
 
-    private void download(URL url, File location) {
-        try {
-            if (logger != null) logger.info("Downloading " + url + "...");
+    private void download(URL url, File location) throws IOException {
+        if (logger != null) logger.info("Downloading " + url + "...");
 
-            //noinspection ResultOfMethodCallIgnored
-            location.getParentFile().mkdirs();
+        //noinspection ResultOfMethodCallIgnored
+        location.getParentFile().mkdirs();
 
-            try (BufferedInputStream in = new BufferedInputStream(
-                    url.openStream());
-                 FileOutputStream output = new FileOutputStream(location)) {
-                byte[] buffer = new byte[1024];
-                int bytes;
-                while ((bytes = in.read(buffer, 0, 1024)) != -1) {
-                    output.write(buffer, 0, bytes);
-                }
+        try (BufferedInputStream in = new BufferedInputStream(url.openStream());
+             FileOutputStream output = new FileOutputStream(location)) {
+            byte[] buffer = new byte[1024];
+            int bytes;
+            while ((bytes = in.read(buffer, 0, 1024)) != -1) {
+                output.write(buffer, 0, bytes);
             }
-        } catch (Exception exception) {
+        } catch (IOException e) {
             if (logger != null)
                 logger.error("Failed to download " + url + "...");
-            throw new RuntimeException(exception);
+            throw e;
         }
     }
 
 
-    private void registerDependencies() {
-        try {
-            final URL jekaUrl =
-                    new URL("https://repo1.maven.org/maven2/dev/jeka/jeka-core/0.10.11/jeka-core-0.10.11.jar");
-            final File jekaPath = new File(getDataDirectory().toFile(), "libs");
-            //noinspection ResultOfMethodCallIgnored
-            jekaPath.mkdirs();
+    private void registerDependencies() throws IOException {
+        final File jekaPath = new File(getDataDirectory().toFile(), "libs");
+        //noinspection ResultOfMethodCallIgnored
+        jekaPath.mkdirs();
 
-            final File jekaFile = new File(jekaPath, "jeka-core-0.10.11.jar");
-            if (!jekaFile.exists()) {
-                download(jekaUrl, jekaFile);
-            }
-
-            getServer().getPluginManager()
-                    .addToClasspath(this, jekaFile.toPath());
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+        final File jekaFile = new File(jekaPath, "jeka-core-0.10.11.jar");
+        if (!jekaFile.exists()) {
+            final URL jekaUrl = new URL("https", "repo1.maven.org",
+                    "maven2/dev/jeka/jeka-core/0.10.11/jeka-core-0.10.11.jar");
+            download(jekaUrl, jekaFile);
         }
+
+        getServer().getPluginManager().addToClasspath(this, jekaFile.toPath());
+
 
         final JkDependencySet deps = JkDependencySet.of()
                 .and("org.jetbrains.kotlin:kotlin-stdlib:1.8.10")
