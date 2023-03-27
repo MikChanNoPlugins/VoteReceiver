@@ -1,9 +1,9 @@
-package dev.mikchan.mcnp.votereceiver.web
+package dev.mikchan.mcnp.votereceiver.core.web
 
 import com.vexsoftware.votifier.model.Vote
 import com.vexsoftware.votifier.net.VotifierSession
 import de.ailis.pherialize.Pherialize
-import dev.mikchan.mcnp.votereceiver.IPlugin
+import dev.mikchan.mcnp.votereceiver.core.IPlugin
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
 import io.ktor.server.response.*
@@ -12,7 +12,6 @@ import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
-import java.util.logging.Level
 
 /**
  * Reference `https://tmonitoring.com/uploads/files/top.zip`
@@ -52,7 +51,7 @@ internal fun Route.createTMonitoringComRoute(plugin: IPlugin) {
                 plugin.voteHandler?.onVoteReceived(vote, VotifierSession.ProtocolVersion.UNKNOWN, address)
 
             } catch (ex: Exception) {
-                plugin.log.log(Level.WARNING, ex.message, ex)
+                plugin.log.warning(ex.message, ex)
             }
         }
     }

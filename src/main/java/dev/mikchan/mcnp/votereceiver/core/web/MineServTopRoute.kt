@@ -1,8 +1,8 @@
-package dev.mikchan.mcnp.votereceiver.web
+package dev.mikchan.mcnp.votereceiver.core.web
 
 import com.vexsoftware.votifier.model.Vote
 import com.vexsoftware.votifier.net.VotifierSession
-import dev.mikchan.mcnp.votereceiver.IPlugin
+import dev.mikchan.mcnp.votereceiver.core.IPlugin
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*

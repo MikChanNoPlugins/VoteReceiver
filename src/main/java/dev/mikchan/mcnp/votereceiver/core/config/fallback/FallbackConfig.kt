@@ -1,6 +1,6 @@
-package dev.mikchan.mcnp.votereceiver.config.fallback
+package dev.mikchan.mcnp.votereceiver.core.config.fallback
 
-import dev.mikchan.mcnp.votereceiver.config.IConfig
+import dev.mikchan.mcnp.votereceiver.core.config.IConfig
 
 internal class FallbackConfig : IConfig {
     override fun reload(): Boolean {

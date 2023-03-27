@@ -7,7 +7,7 @@ website: https://github.com/MikChanNoPlugins
 
 prefix: MCnVoteReceiver
 api-version: 1.19
-main: dev.mikchan.mcnp.votereceiver.VoteReceiverBungeeCordPlugin
+main: dev.mikchan.mcnp.votereceiver.bungee.VoteReceiverBungeeCordPlugin
 
 depend:
   - NuVotifier

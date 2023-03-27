@@ -1,4 +1,4 @@
-package dev.mikchan.mcnp.votereceiver.utility
+package dev.mikchan.mcnp.votereceiver.core.utility
 
 /**
  * Utility
