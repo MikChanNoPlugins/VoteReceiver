@@ -3,7 +3,7 @@ version: '${version}'
 
 authors: [ "George Endo (wtlgo / MikChan)" ]
 description: Converts various monitoring vote systems to Votifier
-website: https://github.com/MikChanNoPlugins
+website: https://github.com/MikChanNoPlugins/VoteReceiver
 
 prefix: MCnVoteReceiver
 api-version: 1.19
