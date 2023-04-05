@@ -1,4 +1,4 @@
-package dev.mikchan.mcnp.votereceiver.config
+package dev.mikchan.mcnp.votereceiver.core.config
 
 /**
  * Describes configuration

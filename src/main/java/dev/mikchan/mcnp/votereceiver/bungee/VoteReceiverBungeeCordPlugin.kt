@@ -1,15 +1,17 @@
-package dev.mikchan.mcnp.votereceiver
+package dev.mikchan.mcnp.votereceiver.bungee
 
 import com.vexsoftware.votifier.VoteHandler
-import dev.mikchan.mcnp.votereceiver.config.IConfig
-import dev.mikchan.mcnp.votereceiver.factory.IFactory
-import dev.mikchan.mcnp.votereceiver.factory.bungee.BungeeCordFactory
-import dev.mikchan.mcnp.votereceiver.utility.IUtility
+import dev.mikchan.mcnp.votereceiver.bungee.factory.BungeeCordFactory
+import dev.mikchan.mcnp.votereceiver.core.IPlugin
+import dev.mikchan.mcnp.votereceiver.core.config.IConfig
+import dev.mikchan.mcnp.votereceiver.core.factory.IFactory
+import dev.mikchan.mcnp.votereceiver.core.log.ILogger
+import dev.mikchan.mcnp.votereceiver.core.log.JvmLoggerProxy
+import dev.mikchan.mcnp.votereceiver.core.utility.IUtility
 import io.ktor.server.engine.*
 import net.md_5.bungee.api.plugin.Plugin
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import java.util.logging.Logger
 
 /**
  * Main bungeeecord plugin class
@@ -23,7 +25,7 @@ class VoteReceiverBungeeCordPlugin : Plugin(), IPlugin {
     override val voteHandler: VoteHandler? by lazy { factory.createVoteHandler() }
     override val threadPool: ExecutorService by lazy { Executors.newSingleThreadExecutor() }
     override val webServer: ApplicationEngine by lazy { factory.createApplicationEngine() }
-    override val log: Logger get() = this.logger
+    override val log: ILogger by lazy { JvmLoggerProxy(this.logger) }
 
     override fun onEnable() {
         webServer.start()

@@ -1,6 +1,6 @@
-package dev.mikchan.mcnp.votereceiver.utility.base
+package dev.mikchan.mcnp.votereceiver.core.utility.base
 
-import dev.mikchan.mcnp.votereceiver.utility.IUtility
+import dev.mikchan.mcnp.votereceiver.core.utility.IUtility
 import java.security.MessageDigest
 
 internal class Utility : IUtility {
