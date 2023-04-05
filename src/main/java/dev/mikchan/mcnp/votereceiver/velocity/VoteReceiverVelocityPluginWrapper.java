@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Properties;
 
 @Plugin(id = "mcn_vote-receiver",
         name = "MikChanNoVoteReceiver",
@@ -99,19 +100,23 @@ public class VoteReceiverVelocityPluginWrapper {
 
 
     private void registerDependencies() throws IOException {
-        final File jekaPath = new File(getDataDirectory().toFile(), "libs");
+        final File libsPath = new File(getDataDirectory().toFile(), "libs");
         //noinspection ResultOfMethodCallIgnored
-        jekaPath.mkdirs();
+        libsPath.mkdirs();
 
-        final File jekaFile = new File(jekaPath, "jeka-core-0.10.12.jar");
+        final File jekaFile = new File(libsPath, "jeka-core-0.10.12.jar");
         if (!jekaFile.exists()) {
             final URL jekaUrl = new URL("https", "repo1.maven.org",
-                    "maven2/dev/jeka/jeka-core/0.10.11/jeka-core-0.10.12.jar");
+                    "maven2/dev/jeka/jeka-core/0.10.12/jeka-core-0.10.12.jar");
             download(jekaUrl, jekaFile);
         }
 
         getServer().getPluginManager().addToClasspath(this, jekaFile.toPath());
 
+        final Properties props = System.getProperties();
+        final Object oldJekaCacheDir = props.get("jeka.cache.dir");
+
+        props.put("jeka.cache.dir", new File(libsPath, "cache").toString());
 
         final JkDependencySet deps = JkDependencySet.of()
                 .and("org.jetbrains.kotlin:kotlin-stdlib:1.8.20")
@@ -124,6 +129,12 @@ public class VoteReceiverVelocityPluginWrapper {
         final JkDependencyResolver resolver = JkDependencyResolver.of()
                 .setRepos(JkRepo.ofMavenCentral().toSet());
         final List<Path> paths = resolver.resolve(deps).getFiles().getEntries();
+
+        if (oldJekaCacheDir != null) {
+            props.put("jeka.cache.dir", oldJekaCacheDir);
+        } else {
+            props.remove("jeka.cache.dir");
+        }
 
         for (final Path path : paths) {
             getServer().getPluginManager().addToClasspath(this, path);
