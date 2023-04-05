@@ -47,6 +47,21 @@ public class VoteReceiverVelocityPluginWrapper {
         this.dataDirectory = dataDirectory;
     }
 
+    private static void withJekaPath(File path, Runnable runnable) {
+        final Properties props = System.getProperties();
+        final String jekaCacheDirProp = "jeka.cache.dir";
+        final Object oldJekaCacheDir = props.get(jekaCacheDirProp);
+        props.put(jekaCacheDirProp, path.toString());
+
+        runnable.run();
+
+        if (oldJekaCacheDir != null) {
+            props.put(jekaCacheDirProp, oldJekaCacheDir);
+        } else {
+            props.remove(jekaCacheDirProp);
+        }
+    }
+
     public ProxyServer getServer() {
         return server;
     }
@@ -98,7 +113,6 @@ public class VoteReceiverVelocityPluginWrapper {
         }
     }
 
-
     private void registerDependencies() throws IOException {
         final File libsPath = new File(getDataDirectory().toFile(), "libs");
         //noinspection ResultOfMethodCallIgnored
@@ -113,31 +127,23 @@ public class VoteReceiverVelocityPluginWrapper {
 
         getServer().getPluginManager().addToClasspath(this, jekaFile.toPath());
 
-        final Properties props = System.getProperties();
-        final Object oldJekaCacheDir = props.get("jeka.cache.dir");
+        withJekaPath(new File(libsPath, "cache"), () -> {
+            final JkDependencySet deps = JkDependencySet.of()
+                    .and("org.jetbrains.kotlin:kotlin-stdlib:1.8.20")
+                    .and("io.ktor:ktor-server-core:2.2.4")
+                    .and("io.ktor:ktor-server-core-jvm:2.2.4")
+                    .and("io.ktor:ktor-server-netty:2.2.4")
+                    .and("io.ktor:ktor-server-netty-jvm:2.2.4")
+                    .and("dev.dejvokep:boosted-yaml:1.3")
+                    .and("com.xk72:pherialize:1.2.4");
+            final JkDependencyResolver resolver = JkDependencyResolver.of()
+                    .setRepos(JkRepo.ofMavenCentral().toSet());
+            final List<Path> paths =
+                    resolver.resolve(deps).getFiles().getEntries();
 
-        props.put("jeka.cache.dir", new File(libsPath, "cache").toString());
-
-        final JkDependencySet deps = JkDependencySet.of()
-                .and("org.jetbrains.kotlin:kotlin-stdlib:1.8.20")
-                .and("io.ktor:ktor-server-core:2.2.4")
-                .and("io.ktor:ktor-server-core-jvm:2.2.4")
-                .and("io.ktor:ktor-server-netty:2.2.4")
-                .and("io.ktor:ktor-server-netty-jvm:2.2.4")
-                .and("dev.dejvokep:boosted-yaml:1.3")
-                .and("com.xk72:pherialize:1.2.4");
-        final JkDependencyResolver resolver = JkDependencyResolver.of()
-                .setRepos(JkRepo.ofMavenCentral().toSet());
-        final List<Path> paths = resolver.resolve(deps).getFiles().getEntries();
-
-        if (oldJekaCacheDir != null) {
-            props.put("jeka.cache.dir", oldJekaCacheDir);
-        } else {
-            props.remove("jeka.cache.dir");
-        }
-
-        for (final Path path : paths) {
-            getServer().getPluginManager().addToClasspath(this, path);
-        }
+            for (final Path path : paths) {
+                getServer().getPluginManager().addToClasspath(this, path);
+            }
+        });
     }
 }
