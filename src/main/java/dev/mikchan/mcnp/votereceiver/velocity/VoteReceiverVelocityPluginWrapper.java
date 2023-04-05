@@ -103,10 +103,10 @@ public class VoteReceiverVelocityPluginWrapper {
         //noinspection ResultOfMethodCallIgnored
         jekaPath.mkdirs();
 
-        final File jekaFile = new File(jekaPath, "jeka-core-0.10.11.jar");
+        final File jekaFile = new File(jekaPath, "jeka-core-0.10.12.jar");
         if (!jekaFile.exists()) {
             final URL jekaUrl = new URL("https", "repo1.maven.org",
-                    "maven2/dev/jeka/jeka-core/0.10.11/jeka-core-0.10.11.jar");
+                    "maven2/dev/jeka/jeka-core/0.10.11/jeka-core-0.10.12.jar");
             download(jekaUrl, jekaFile);
         }
 
@@ -114,7 +114,7 @@ public class VoteReceiverVelocityPluginWrapper {
 
 
         final JkDependencySet deps = JkDependencySet.of()
-                .and("org.jetbrains.kotlin:kotlin-stdlib:1.8.10")
+                .and("org.jetbrains.kotlin:kotlin-stdlib:1.8.20")
                 .and("io.ktor:ktor-server-core:2.2.4")
                 .and("io.ktor:ktor-server-core-jvm:2.2.4")
                 .and("io.ktor:ktor-server-netty:2.2.4")
