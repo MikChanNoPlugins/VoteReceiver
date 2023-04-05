@@ -22,7 +22,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Properties;
 
-@Plugin(id = "mcn_vote-receiver",
+@Plugin(id = "mikchan-no-vote-receiver",
         name = "MikChanNoVoteReceiver",
         version = "0.1.0-SNAPSHOT",
         url = "https://github.com/MikChanNoPlugins/VoteReceiver",
