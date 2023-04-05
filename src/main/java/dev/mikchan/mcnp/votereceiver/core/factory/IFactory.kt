@@ -1,9 +1,9 @@
-package dev.mikchan.mcnp.votereceiver.factory
+package dev.mikchan.mcnp.votereceiver.core.factory
 
 import com.vexsoftware.votifier.NuVotifierBukkit
 import com.vexsoftware.votifier.VoteHandler
-import dev.mikchan.mcnp.votereceiver.config.IConfig
-import dev.mikchan.mcnp.votereceiver.utility.IUtility
+import dev.mikchan.mcnp.votereceiver.core.config.IConfig
+import dev.mikchan.mcnp.votereceiver.core.utility.IUtility
 import io.ktor.server.engine.*
 
 /**
