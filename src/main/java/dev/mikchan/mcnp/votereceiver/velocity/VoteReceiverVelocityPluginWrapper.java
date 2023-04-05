@@ -22,6 +22,9 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * Main velocity plugin class
+ */
 @Plugin(id = "mikchan-no-vote-receiver",
         name = "MikChanNoVoteReceiver",
         version = "0.1.0-SNAPSHOT",
@@ -38,6 +41,13 @@ public class VoteReceiverVelocityPluginWrapper {
 
     private VoteReceiverVelocityPlugin plugin;
 
+    /**
+     * The constructor
+     *
+     * @param server        The server instance
+     * @param logger        The logger instance
+     * @param dataDirectory The plugin data directory
+     */
     @Inject
     public VoteReceiverVelocityPluginWrapper(ProxyServer server, Logger logger,
                                              @DataDirectory
@@ -62,18 +72,39 @@ public class VoteReceiverVelocityPluginWrapper {
         }
     }
 
+    /**
+     * The server instance
+     *
+     * @return The server instance
+     */
     public ProxyServer getServer() {
         return server;
     }
 
+    /**
+     * The logger instance
+     *
+     * @return The logger instance
+     */
     public Logger getLogger() {
         return logger;
     }
 
+    /**
+     * The plugin data directory
+     *
+     * @return The plugin data directory
+     */
     public Path getDataDirectory() {
         return dataDirectory;
     }
 
+
+    /**
+     * ProxyInitializeEvent listener
+     *
+     * @param event The event instance
+     */
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
         try {
@@ -86,8 +117,13 @@ public class VoteReceiverVelocityPluginWrapper {
         }
     }
 
+    /**
+     * ProxyShutdownEvent listener
+     *
+     * @param event The event instance
+     */
     @Subscribe
-    void onProxyShutdownEvent(ProxyShutdownEvent event) {
+    public void onProxyShutdownEvent(ProxyShutdownEvent event) {
         if (plugin == null) return;
         plugin.getWebServer().stop(500, 500);
         plugin.getThreadPool().shutdown();
