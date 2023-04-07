@@ -32,6 +32,13 @@ public class VoteReceiverVelocityPluginWrapper {
 
     private VoteReceiverVelocityPlugin plugin;
 
+    /**
+     * The main constructor
+     *
+     * @param server        The server instance
+     * @param logger        The logger instance
+     * @param dataDirectory The data directory path
+     */
     @Inject
     public VoteReceiverVelocityPluginWrapper(ProxyServer server, Logger logger,
                                              @DataDirectory
