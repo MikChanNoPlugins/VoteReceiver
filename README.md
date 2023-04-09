@@ -5,6 +5,12 @@
 # MikChanの VoteReceiver
 Converts various monitoring vote systems to Votifier events
 
+## Supported Software
+
+-   Spigot/Paper/Other Bukkit forks 1.16+
+-   BungeeCord/Waterfall
+-   Velocity
+
 ## Dependencies
 
 -   [NuVotifier](https://www.spigotmc.org/resources/nuvotifier.13449/)
