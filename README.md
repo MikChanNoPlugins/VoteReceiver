@@ -5,6 +5,12 @@
 # MikChanの VoteReceiver
 Converts various monitoring vote systems to Votifier events
 
+## Supported Software
+
+-   Spigot/Paper/Other Bukkit forks 1.16+
+-   BungeeCord/Waterfall
+-   Velocity
+
 ## Dependencies
 
 -   [NuVotifier](https://www.spigotmc.org/resources/nuvotifier.13449/)
@@ -13,6 +19,7 @@ Converts various monitoring vote systems to Votifier events
 
 -   [MineServ](https://mineserv.top)
 -   [TMonitoring](https://tmonitoring.com)
+-   If you wish me to add another one, please, open an [issue on GitHub](https://github.com/MikChanNoPlugins/VoteReceiver/issues)
 
 ## Support the creator
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/mcnp)
