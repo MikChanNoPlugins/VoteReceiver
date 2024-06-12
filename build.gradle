@@ -52,6 +52,9 @@ repositories {
     maven {
         name = "Ailis Maven Releases"
         url = "https://nexus.ailis.de/repository/maven-releases/de/ailis/pherialize/pherialize/"
+        content {
+            includeGroup  "com.xk72"
+        }
     }
 
     maven {
