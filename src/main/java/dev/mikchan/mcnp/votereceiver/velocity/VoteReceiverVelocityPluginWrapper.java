@@ -94,7 +94,7 @@ public class VoteReceiverVelocityPluginWrapper {
     }
 
     private void download(URL url, File location) throws IOException {
-        if (logger != null) logger.info("Downloading " + url + "...");
+        if (logger != null) logger.info("Downloading {}...", url);
 
         //noinspection ResultOfMethodCallIgnored
         location.getParentFile().mkdirs();
@@ -108,7 +108,7 @@ public class VoteReceiverVelocityPluginWrapper {
             }
         } catch (IOException e) {
             if (logger != null)
-                logger.error("Failed to download " + url + "...");
+                logger.error("Failed to download {}...", url);
             throw e;
         }
     }
