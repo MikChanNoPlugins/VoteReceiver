@@ -17,7 +17,7 @@ import java.net.http.HttpResponse
  * Reference `https://tmonitoring.com/uploads/files/top.zip`
  */
 internal fun Route.createTMonitoringComRoute(plugin: IPlugin) {
-    get("/tmonitoring.com") {
+    get("/tmonitoring.com/top.php") {
         val hash = call.request.queryParameters["hash"]
         val id = call.request.queryParameters["id"]
 
