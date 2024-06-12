@@ -129,12 +129,12 @@ public class VoteReceiverVelocityPluginWrapper {
 
         withJekaPath(new File(libsPath, "cache"), () -> {
             final JkDependencySet deps = JkDependencySet.of()
-                    .and("org.jetbrains.kotlin:kotlin-stdlib:1.8.20")
-                    .and("io.ktor:ktor-server-core:2.2.4")
-                    .and("io.ktor:ktor-server-core-jvm:2.2.4")
-                    .and("io.ktor:ktor-server-netty:2.2.4")
-                    .and("io.ktor:ktor-server-netty-jvm:2.2.4")
-                    .and("dev.dejvokep:boosted-yaml:1.3")
+                    .and("org.jetbrains.kotlin:kotlin-stdlib:2.0.0")
+                    .and("io.ktor:ktor-server-core:2.3.11")
+                    .and("io.ktor:ktor-server-core-jvm:2.3.11")
+                    .and("io.ktor:ktor-server-netty:2.3.11")
+                    .and("io.ktor:ktor-server-netty-jvm:2.3.11")
+                    .and("dev.dejvokep:boosted-yaml:1.3.5")
                     .and("com.xk72:pherialize:1.2.4");
             final JkDependencyResolver resolver = JkDependencyResolver.of()
                     .setRepos(JkRepo.ofMavenCentral().toSet());
