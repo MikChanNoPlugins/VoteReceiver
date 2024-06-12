@@ -86,7 +86,7 @@ dependencies {
     shadow "org.bstats:bstats-bukkit:3.0.1"
 }
 
-def targetJavaVersion = 11
+def targetJavaVersion = 17
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     if (JavaVersion.current() < javaVersion) {
