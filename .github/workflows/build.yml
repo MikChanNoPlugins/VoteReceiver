@@ -34,7 +34,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: dev-${{ steps.commit.outputs.short }}
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: MikChanNoVoteReceiver-dev-${{ steps.commit.outputs.short }}.zip
           path: |
