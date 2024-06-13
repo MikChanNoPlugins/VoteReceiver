@@ -1,0 +1,17 @@
+{
+  "id": "mikchan-no-vote-receiver",
+  "name": "MikChanNoVoteReceiver",
+  "version": "${version}",
+  "description": "Converts various monitoring vote systems to Votifier",
+  "url": "https://github.com/MikChanNoPlugins/VoteReceiver",
+  "authors": [
+    "George Endo (wtlgo / MikChan)"
+  ],
+  "dependencies": [
+    {
+      "id": "nuvotifier",
+      "optional": false
+    }
+  ],
+  "main": "dev.mikchan.mcnp.votereceiver.velocity.VoteReceiverVelocityPluginWrapper"
+}

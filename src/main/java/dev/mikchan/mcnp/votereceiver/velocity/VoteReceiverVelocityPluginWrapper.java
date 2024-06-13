@@ -4,8 +4,6 @@ import com.google.inject.Inject;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
-import com.velocitypowered.api.plugin.Dependency;
-import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
 import dev.jeka.core.api.depmanagement.JkDependencySet;
@@ -22,13 +20,9 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Properties;
 
-@Plugin(id = "mikchan-no-vote-receiver",
-        name = "MikChanNoVoteReceiver",
-        version = "0.1.0-SNAPSHOT",
-        url = "https://github.com/MikChanNoPlugins/VoteReceiver",
-        description = "Converts various monitoring vote systems to Votifier",
-        authors = {"George Endo (wtlgo / MikChan)"},
-        dependencies = {@Dependency(id = "nuvotifier")})
+/**
+ * The main Velocity plugin class
+ */
 public class VoteReceiverVelocityPluginWrapper {
     private final ProxyServer server;
 
@@ -38,6 +32,13 @@ public class VoteReceiverVelocityPluginWrapper {
 
     private VoteReceiverVelocityPlugin plugin;
 
+    /**
+     * The main constructor
+     *
+     * @param server        The server instance
+     * @param logger        The logger instance
+     * @param dataDirectory The data directory path
+     */
     @Inject
     public VoteReceiverVelocityPluginWrapper(ProxyServer server, Logger logger,
                                              @DataDirectory
@@ -62,18 +63,38 @@ public class VoteReceiverVelocityPluginWrapper {
         }
     }
 
+    /**
+     * The server instance
+     *
+     * @return The server instance
+     */
     public ProxyServer getServer() {
         return server;
     }
 
+    /**
+     * The logger instance
+     *
+     * @return The logger instance
+     */
     public Logger getLogger() {
         return logger;
     }
 
+    /**
+     * The data directory path
+     *
+     * @return The data directory path
+     */
     public Path getDataDirectory() {
         return dataDirectory;
     }
 
+    /**
+     * ProxyInitializeEvent listener
+     *
+     * @param event The event instance
+     */
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
         try {
@@ -86,8 +107,13 @@ public class VoteReceiverVelocityPluginWrapper {
         }
     }
 
+    /**
+     * ProxyShutdownEvent listener
+     *
+     * @param event The event instance
+     */
     @Subscribe
-    void onProxyShutdownEvent(ProxyShutdownEvent event) {
+    public void onProxyShutdownEvent(ProxyShutdownEvent event) {
         if (plugin == null) return;
         plugin.getWebServer().stop(500, 500);
         plugin.getThreadPool().shutdown();
