@@ -4,6 +4,8 @@ import com.google.inject.Inject;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
+import com.velocitypowered.api.plugin.Dependency;
+import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
 import dev.jeka.core.api.depmanagement.JkDependencySet;
@@ -23,6 +25,13 @@ import java.util.Properties;
 /**
  * The main Velocity plugin class
  */
+@Plugin(id = "mikchan-no-vote-receiver",
+        name = "MikChanNoVoteReceiver",
+        version = "0.1.0-SNAPSHOT",
+        url = "https://github.com/MikChanNoPlugins/VoteReceiver",
+        description = "Converts various monitoring vote systems to Votifier",
+        authors = {"George Endo (wtlgo / MikChan)"},
+        dependencies = {@Dependency(id = "nuvotifier")})
 public class VoteReceiverVelocityPluginWrapper {
     private final ProxyServer server;
 
