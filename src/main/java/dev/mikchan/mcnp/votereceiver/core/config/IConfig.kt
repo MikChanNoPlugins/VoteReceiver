@@ -22,6 +22,11 @@ interface IConfig {
     val mineServTopKey: String?
 
     /**
+     * A secret word of `mctop.im`
+     */
+    val mcTopImSecretWord: String?
+
+    /**
      * Determines, if the test route accessible.
      *
      * WARNING: Should NEVER be `true` in production

@@ -8,6 +8,7 @@ internal fun Application.buildRoutes(plugin: IPlugin) {
     routing {
         createMineServTopRoute(plugin)
         createTMonitoringComRoute(plugin)
+        createMcTopImRoute(plugin)
 
         if (plugin.config.testEnabled) {
             createTestRoute(plugin)
