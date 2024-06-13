@@ -1,5 +1,5 @@
 # Automatic property, do not touch!
-config-version: 4
+config-version: 5
 
 port: 6418
 
@@ -11,6 +11,9 @@ mctop-im-secret: ""
 
 # topcraft.club
 topcraft-club-key: ""
+
+# minecraftrating.ru
+minecraftrating-ru-key: ""
 
 # Enables the route /test?username=[username]
 # Warning: Should NEVER EVER be true

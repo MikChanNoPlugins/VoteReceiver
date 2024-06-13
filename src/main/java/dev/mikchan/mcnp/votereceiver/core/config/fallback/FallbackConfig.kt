@@ -11,5 +11,6 @@ internal class FallbackConfig : IConfig {
     override val mineServTopKey: String? get() = null
     override val mcTopImSecretWord: String? get() = null
     override val topcraftClubKey: String? get() = null
+    override val minecraftingRuKey: String? get() = null
     override val testEnabled: Boolean get() = false
 }

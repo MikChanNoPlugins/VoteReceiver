@@ -10,6 +10,7 @@ internal fun Application.buildRoutes(plugin: IPlugin) {
         createTMonitoringComRoute(plugin)
         createMcTopImRoute(plugin)
         createTopcraftClubRoute(plugin)
+        createMinecraftratingRuRoute(plugin)
 
         if (plugin.config.testEnabled) {
             createTestRoute(plugin)

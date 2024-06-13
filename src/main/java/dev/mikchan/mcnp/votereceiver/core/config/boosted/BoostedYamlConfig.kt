@@ -28,5 +28,6 @@ internal class BoostedYamlConfig(document: File, resource: InputStream) : IConfi
     override val mineServTopKey: String? get() = config.getString("mineserv-top-key")
     override val mcTopImSecretWord: String? get() = config.getString("mctop-im-secret")
     override val topcraftClubKey: String? get() = config.getString("topcraft-club-key")
+    override val minecraftingRuKey: String? get() = config.getString("minecraftrating-ru-key")
     override val testEnabled: Boolean get() = config.getBoolean("enable-test-route", false)
 }

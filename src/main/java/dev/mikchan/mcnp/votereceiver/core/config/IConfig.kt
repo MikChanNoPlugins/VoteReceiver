@@ -32,6 +32,11 @@ interface IConfig {
     val topcraftClubKey: String?
 
     /**
+     * A secret key of minecraftrating.ru
+     */
+    val minecraftingRuKey: String?
+
+    /**
      * Determines, if the test route accessible.
      *
      * WARNING: Should NEVER be `true` in production
