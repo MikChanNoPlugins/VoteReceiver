@@ -1,7 +1,7 @@
 plugins {
     id "java"
     id "org.jetbrains.kotlin.jvm" version "2.0.0"
-    id "org.jetbrains.dokka" version "1.7.20"
+    id "org.jetbrains.dokka" version "1.9.20"
     id "maven-publish"
     id "com.github.johnrengelman.shadow" version "7.1.2"
 }
@@ -121,20 +121,10 @@ if (file("local.gradle").exists()) {
     apply from: "local.gradle"
 }
 
-/*
-dokkaHtml {
-    outputDirectory.set(file("${buildDir}/dokka"))
-}
-
-javadocJar {
+tasks.register('dokkaJavadocJar', Jar.class) {
+    dependsOn(dokkaJavadoc)
+    from(dokkaJavadoc)
     archiveClassifier.set("javadoc")
-    dependsOn("dokkaHtml")
-    from("$buildDir/dokka")
-}
-*/
-
-javadocJar {
-    from(tasks.named("dokkaJavadoc"))
 }
 
 shadowJar {
@@ -169,7 +159,7 @@ publishing {
             artifactId = "vote-receiver"
 
             artifact jar
-            artifact javadocJar
+            artifact dokkaJavadocJar
             artifact sourcesJar
         }
     }
