@@ -38,7 +38,7 @@ internal fun Route.createTopcraftClubRoute(plugin: IPlugin) {
         }
 
         val template = "$username$timestamp$secret"
-        val hash = plugin.utility.sha256(template)
+        val hash = plugin.utility.sha1(template)
         if (signature != hash) {
             call.respond(HttpStatusCode.InternalServerError, "Signature check failed")
             return@post
