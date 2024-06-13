@@ -24,4 +24,11 @@ interface IUtility {
      * @return Md5 hash string
      */
     fun md5(input: String): String
+
+    /**
+     * SHA-1 hashing algorithm
+     *
+     * @return SHA-1 hash string
+     */
+    fun sha1(input: String): String
 }

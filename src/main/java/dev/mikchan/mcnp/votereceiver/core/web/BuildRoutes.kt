@@ -9,6 +9,7 @@ internal fun Application.buildRoutes(plugin: IPlugin) {
         createMineServTopRoute(plugin)
         createTMonitoringComRoute(plugin)
         createMcTopImRoute(plugin)
+        createTopcraftClubRoute(plugin)
 
         if (plugin.config.testEnabled) {
             createTestRoute(plugin)

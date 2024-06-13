@@ -12,4 +12,5 @@ internal class Utility : IUtility {
 
     override fun sha256(input: String): String = hash(input, "SHA-256")
     override fun md5(input: String): String = hash(input, "MD5")
+    override fun sha1(input: String): String = hash(input, "SHA-1")
 }

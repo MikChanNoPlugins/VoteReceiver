@@ -1,5 +1,5 @@
 # Automatic property, do not touch!
-config-version: 3
+config-version: 4
 
 port: 6418
 
@@ -8,6 +8,9 @@ mineserv-top-key: ""
 
 # mctop.im
 mctop-im-secret: ""
+
+# topcraft.club
+topcraft-club-key: ""
 
 # Enables the route /test?username=[username]
 # Warning: Should NEVER EVER be true

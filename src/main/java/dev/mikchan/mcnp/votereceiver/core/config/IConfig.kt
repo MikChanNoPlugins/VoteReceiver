@@ -27,6 +27,11 @@ interface IConfig {
     val mcTopImSecretWord: String?
 
     /**
+     * A secret key of `topcraft.club`
+     */
+    val topcraftClubKey: String?
+
+    /**
      * Determines, if the test route accessible.
      *
      * WARNING: Should NEVER be `true` in production
