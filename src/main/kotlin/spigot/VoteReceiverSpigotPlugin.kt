@@ -8,12 +8,7 @@ import dev.mikchan.mcnp.votereceiver.core.log.ILogger
 import dev.mikchan.mcnp.votereceiver.core.log.JvmLoggerProxy
 import dev.mikchan.mcnp.votereceiver.core.utility.IUtility
 import dev.mikchan.mcnp.votereceiver.spigot.factory.SpigotFactory
-import io.ktor.server.application.*
 import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import io.ktor.server.plugins.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
 import org.bstats.bukkit.Metrics
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.concurrent.ExecutorService
@@ -26,7 +21,7 @@ import java.util.concurrent.Executors
 @Suppress("unused")
 class VoteReceiverSpigotPlugin : JavaPlugin(), IPlugin {
     companion object {
-        private const val bStatsId = 17922
+        private const val B_STATS_ID = 17922
     }
 
     private val factory: IFactory by lazy { SpigotFactory(this) }
@@ -41,7 +36,7 @@ class VoteReceiverSpigotPlugin : JavaPlugin(), IPlugin {
     override fun onEnable() {
         webServer.start()
 
-        Metrics(this, bStatsId)
+        Metrics(this, B_STATS_ID)
     }
 
     override fun onDisable() {

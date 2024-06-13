@@ -17,7 +17,7 @@ import java.net.http.HttpResponse
  * Reference `https://tmonitoring.com/uploads/files/top.zip`
  */
 internal fun Route.createTMonitoringComRoute(plugin: IPlugin) {
-    get("/tmonitoring.com") {
+    get("/tmonitoring.com/top.php") {
         val hash = call.request.queryParameters["hash"]
         val id = call.request.queryParameters["id"]
 
@@ -31,13 +31,14 @@ internal fun Route.createTMonitoringComRoute(plugin: IPlugin) {
         val address = call.request.origin.remoteHost
 
         plugin.threadPool.submit {
+            var result: String? = null
             try {
                 val client = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.ALWAYS).build()
                 val request =
                     HttpRequest.newBuilder().uri(URI.create("https://tmonitoring.com/api/check/$hash?id=$id")).build()
 
                 val response = client.send(request, HttpResponse.BodyHandlers.ofString())
-                val result = response.body() ?: return@submit
+                result = response.body() ?: return@submit
 
                 val data = Pherialize.unserialize(result).toArray() ?: return@submit
 
@@ -49,9 +50,8 @@ internal fun Route.createTMonitoringComRoute(plugin: IPlugin) {
 
                 val vote = Vote("tmonitoring.com", username, address, System.currentTimeMillis().toString(10))
                 plugin.voteHandler?.onVoteReceived(vote, VotifierSession.ProtocolVersion.UNKNOWN, address)
-
             } catch (ex: Exception) {
-                plugin.log.warning(ex.message, ex)
+                plugin.log.warning("${ex.message}; Body: $result", ex)
             }
         }
     }
