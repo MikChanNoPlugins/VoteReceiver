@@ -14,7 +14,7 @@ import io.ktor.server.routing.*
  * Reference: `https://mctop.im/awards.zip`
  */
 internal fun Route.createMcTopImRoute(plugin: IPlugin) {
-    post("/mctop.im/award.php") {
+    post("/mctop.im") {
         val secretWord = plugin.config.mcTopImSecretWord
         if (secretWord == null) {
             call.respond(HttpStatusCode.InternalServerError, "-1")
