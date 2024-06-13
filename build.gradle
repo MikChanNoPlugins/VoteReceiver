@@ -24,7 +24,7 @@ static def determineVersion(String defaultVersion) {
 }
 
 group = "dev.mikchan.mcnp"
-version = determineVersion("1.4.0")
+version = determineVersion("1.4.1")
 
 def localProperties = new Properties()
 def propertiesFile = rootProject.file("local.properties")
@@ -107,13 +107,13 @@ processResources {
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = 11
+        jvmTarget = targetJavaVersion
     }
 }
 
 compileTestKotlin {
     kotlinOptions {
-        jvmTarget = 11
+        jvmTarget = targetJavaVersion
     }
 }
 
