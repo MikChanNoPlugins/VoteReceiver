@@ -19,6 +19,9 @@ Converts various monitoring vote systems to Votifier events
 
 -   [MineServ](https://mineserv.top)
 -   [TMonitoring](https://tmonitoring.com)
+-   [MCTop](https://mctop.im)
+-   [MinecraftRating](https://minecraftrating.ru)
+-   [TopCraft](https://topcraft.club)
 -   If you wish me to add another one, please, open an [issue on GitHub](https://github.com/MikChanNoPlugins/VoteReceiver/issues)
 
 ## Support the creator
