@@ -107,13 +107,13 @@ processResources {
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = 11
+        jvmTarget = targetJavaVersion
     }
 }
 
 compileTestKotlin {
     kotlinOptions {
-        jvmTarget = 11
+        jvmTarget = targetJavaVersion
     }
 }
 
