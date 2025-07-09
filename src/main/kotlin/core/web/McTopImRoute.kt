@@ -14,18 +14,18 @@ import io.ktor.server.routing.*
  * Reference: `https://mctop.im/awards.zip`
  */
 internal fun Route.createMcTopImRoute(plugin: IPlugin) {
-    post("/mctop.im") {
+    get("/mctop.im") {
         val secretWord = plugin.config.mcTopImSecretWord
         if (secretWord == null) {
             call.respond(HttpStatusCode.InternalServerError, "-1")
-            return@post
+            return@get
         }
 
         val parameters = try {
             call.receiveParameters()
         } catch (ex: Exception) {
             call.respond(HttpStatusCode.InternalServerError, "-1")
-            return@post
+            return@get
         }
 
         val nick = parameters["nickname"]
@@ -33,13 +33,13 @@ internal fun Route.createMcTopImRoute(plugin: IPlugin) {
 
         if (nick == null || token == null) {
             call.respond(HttpStatusCode.InternalServerError, "-1")
-            return@post
+            return@get
         }
 
         val hash = plugin.utility.md5(nick + secretWord)
         if (token != hash) {
             call.respond(HttpStatusCode.InternalServerError, "-2")
-            return@post
+            return@get
         }
 
         val vote = Vote("mctop.im", nick, call.request.origin.remoteHost, System.currentTimeMillis().toString(10))
