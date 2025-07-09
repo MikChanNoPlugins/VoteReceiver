@@ -28,7 +28,7 @@ internal fun Route.createMcTopImRoute(plugin: IPlugin) {
             return@post
         }
 
-        val nick = parameters["nick"]
+        val nick = parameters["nickname"]
         val token = parameters["token"]
 
         if (nick == null || token == null) {
