@@ -21,15 +21,8 @@ internal fun Route.createMcTopImRoute(plugin: IPlugin) {
             return@get
         }
 
-        val parameters = try {
-            call.receiveParameters()
-        } catch (ex: Exception) {
-            call.respond(HttpStatusCode.InternalServerError, "-1")
-            return@get
-        }
-
-        val nick = parameters["nickname"]
-        val token = parameters["token"]
+        val nick = call.request.queryParameters["nickname"]
+        val token = call.request.queryParameters["token"]
 
         if (nick == null || token == null) {
             call.respond(HttpStatusCode.InternalServerError, "-1")
